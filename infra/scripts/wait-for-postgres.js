@@ -1,18 +1,36 @@
 const { exec } = require("node:child_process");
+let count = 0;
+const clock = [
+  "🕛",
+  "🕐",
+  "🕑",
+  "🕓",
+  "🕔",
+  "🕕",
+  "🕖",
+  "🕗",
+  "🕘",
+  "🕙",
+  "🕚",
+];
 
 function chechPostgres() {
   exec(
     "docker exec postgres-dev pg_isready --host localhost",
     (error, stdout) => {
       if (error) {
-        process.stdout.write(".");
-        return setTimeout(chechPostgres, 1000);
+        process.stdout.write(
+          `\r${clock[count % clock.length]} Aguardando o postgres aceitar conexões`,
+        );
+
+        count++;
+        setTimeout(chechPostgres, 250);
+        return;
       }
 
-      console.log("\n🟢 Postgres está pronto\n");
+      process.stdout.write("\r🟢 Postgres está pronto e aceitando conexões");
     },
   );
 }
 
-process.stdout.write("\n\n🔴 Aguardando o postgres aceitar conexões");
 chechPostgres();
