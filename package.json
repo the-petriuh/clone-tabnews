@@ -10,8 +10,8 @@
     "services:stop": "docker compose -f infra/compose.yaml stop",
     "lint:check": "prettier --check .",
     "lint:fix": "prettier --write .",
-    "tests": "npm run services:up && npm run wait-for-postgres && concurrently --names next,jest --hide next -k --success command-jest \"sleep 10; next dev\" \"jest --runInBand --verbose\"",
-    "tests:watch": "jest --watchAll --runInBand",
+    "test": "npm run services:up && npm run wait-for-postgres && concurrently --names next,jest --hide next -k --success command-jest \"sleep 10; next dev\" \"jest --runInBand --verbose\"",
+    "test:watch": "jest --watchAll --runInBand",
     "migration:create": "node-pg-migrate --migrations-dir infra/migrations create",
     "migration:up": "node-pg-migrate --migrations-dir infra/migrations --envPath .env.development up",
     "wait-for-postgres": "node infra/scripts/wait-for-postgres.js"
