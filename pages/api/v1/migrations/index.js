@@ -1,7 +1,6 @@
 import migrationRunner from "node-pg-migrate";
 import path from "node:path";
 import database from "infra/database.js";
-import { error } from "node:console";
 
 export default async function migrations(request, response) {
   if (!["GET", "POST"].includes(request.method)) {
@@ -35,6 +34,7 @@ export default async function migrations(request, response) {
 
     return response.status(200).json(migrations);
   } catch (exception) {
+    console.error("error trying to access database: ", exception);
     throw exception;
   } finally {
     await dbClient.end();

@@ -23,6 +23,7 @@ async function waitForAllServices() {
           throw new Error(`HTTP Error ${response.status}`);
         }
       } catch (error) {
+        console.log("error trying to fetch: ", error);
         throw error;
       }
     }
