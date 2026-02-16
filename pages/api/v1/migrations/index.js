@@ -1,4 +1,4 @@
-import migrationRunner from "node-pg-migrate";
+import { runner as migrationRunner } from "node-pg-migrate";
 import path from "node:path";
 import database from "infra/database.js";
 
