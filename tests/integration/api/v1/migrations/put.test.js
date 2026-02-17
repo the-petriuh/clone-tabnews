@@ -6,13 +6,17 @@ beforeAll(async () => {
   await database.query("drop schema public cascade; create schema public;");
 });
 
-test("PUT to api/v1/migrations should return 200", async () => {
-  // first request
-  const response1 = await fetch(
-    `${process.env.LOCALHOST_URL}/api/v1/migrations`,
-    {
-      method: "PUT",
-    },
-  );
-  expect(response1.status).toBe(405);
+describe("PUT api/v1/migrations", () => {
+  describe("Anonymous user", () => {
+    test("Should return 405", async () => {
+      // first request
+      const response1 = await fetch(
+        `${process.env.LOCALHOST_URL}/api/v1/migrations`,
+        {
+          method: "PUT",
+        },
+      );
+      expect(response1.status).toBe(405);
+    });
+  });
 });
