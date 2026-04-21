@@ -8,10 +8,11 @@ async function query(queryObject) {
     const result = await client.query(queryObject);
     return result;
   } catch (exception) {
+    console.log("\n Erro dentro do catch do database.js");
     console.log(exception);
     throw exception;
   } finally {
-    await client.end();
+    await client?.end();
   }
 }
 
