@@ -12,7 +12,7 @@ describe("GET api/v1/migrations", () => {
       const response = await fetch(
         `${process.env.LOCALHOST_URL}/api/v1/migrations`,
       );
-      expect(response.status).toBe(201);
+      expect(response.status).toBe(200);
 
       const responseBody = await response.json();
 
