@@ -43,8 +43,8 @@ export class ValidationError extends Error {
     super(message || "Ocorreu um erro ao validar os dados.", {
       cause,
     });
-    this.name = "ValidationError"
-    this.action = action || "Informe outros dados e tente novamente"
+    this.name = "ValidationError";
+    this.action = action || "Informe outros dados e tente novamente";
     this.statusCode = 400;
   }
 

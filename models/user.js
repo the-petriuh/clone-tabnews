@@ -20,14 +20,14 @@ async function create(userInputData) {
         ;`,
       values: [username],
     });
-    
+
     if (result.rowCount > 0) {
       throw new ValidationError({
         message: "O nome de usuário informado já existe.",
         action: "informe um nome de usuário diferente e tente novamente.",
       });
     }
-  };
+  }
 
   async function validateUserEmail(email) {
     const result = await database.query({
@@ -41,14 +41,14 @@ async function create(userInputData) {
         ;`,
       values: [email],
     });
-    
+
     if (result.rowCount > 0) {
       throw new ValidationError({
         message: "O email informada já existe.",
         action: "informe um email diferente e tente novamente.",
       });
     }
-  };
+  }
 
   async function runInsertQuery(userInputData) {
     const result = await database.query({
@@ -60,15 +60,19 @@ async function create(userInputData) {
         RETURNING
           *
         ;`,
-      values: [userInputData.username, userInputData.email, userInputData.password],
+      values: [
+        userInputData.username,
+        userInputData.email,
+        userInputData.password,
+      ],
     });
-    
+
     return result.rows[0];
   }
 }
 
 const user = {
   create,
-}
+};
 
 export default user;

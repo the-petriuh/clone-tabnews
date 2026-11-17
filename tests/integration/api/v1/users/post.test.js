@@ -13,7 +13,6 @@ beforeAll(async () => {
 describe("POST api/v1/users", () => {
   describe("Anonymous user", () => {
     test("With unique and valid data", async () => {
-
       // first request
       const response = await fetch(
         `${process.env.LOCALHOST_URL}/api/v1/users`,
@@ -25,8 +24,8 @@ describe("POST api/v1/users", () => {
           body: JSON.stringify({
             username: "daniel.petriu",
             email: "daniel.petriu@gmail.com",
-            password: "senha123"
-          })
+            password: "senha123",
+          }),
         },
       );
 
@@ -43,13 +42,12 @@ describe("POST api/v1/users", () => {
         updated_at: responseBody.updated_at,
       });
 
-        expect(uuidVersion(responseBody.id)).toBe(4);
-        expect(Date.parse(responseBody.created_at)).not.toBeNaN();
-        expect(Date.parse(responseBody.updated_at)).not.toBeNaN();
+      expect(uuidVersion(responseBody.id)).toBe(4);
+      expect(Date.parse(responseBody.created_at)).not.toBeNaN();
+      expect(Date.parse(responseBody.updated_at)).not.toBeNaN();
     });
 
     test("With duplicated email", async () => {
-
       // first request
       const response1 = await fetch(
         `${process.env.LOCALHOST_URL}/api/v1/users`,
@@ -61,8 +59,8 @@ describe("POST api/v1/users", () => {
           body: JSON.stringify({
             username: "email.duplicado",
             email: "duplicado@email.com",
-            password: "senha123"
-          })
+            password: "senha123",
+          }),
         },
       );
 
@@ -78,8 +76,8 @@ describe("POST api/v1/users", () => {
           body: JSON.stringify({
             username: "email.duplicado1",
             email: "Duplicado@email.com",
-            password: "senha123"
-          })
+            password: "senha123",
+          }),
         },
       );
 
@@ -96,7 +94,6 @@ describe("POST api/v1/users", () => {
     });
 
     test("With duplicated username", async () => {
-
       // first request
       const response1 = await fetch(
         `${process.env.LOCALHOST_URL}/api/v1/users`,
@@ -108,8 +105,8 @@ describe("POST api/v1/users", () => {
           body: JSON.stringify({
             username: "username.duplicado",
             email: "username1@email.com",
-            password: "senha123"
-          })
+            password: "senha123",
+          }),
         },
       );
 
@@ -125,8 +122,8 @@ describe("POST api/v1/users", () => {
           body: JSON.stringify({
             username: "username.duplicado",
             email: "username2@email.com",
-            password: "senha123"
-          })
+            password: "senha123",
+          }),
         },
       );
 
