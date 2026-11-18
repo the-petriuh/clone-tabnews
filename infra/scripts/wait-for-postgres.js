@@ -1,4 +1,5 @@
-const { exec } = require("node:child_process");
+import { exec } from "node:child_process";
+
 let count = 0;
 const clock = [
   "🕛",
