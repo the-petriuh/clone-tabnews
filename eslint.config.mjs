@@ -20,7 +20,7 @@ export default defineConfig([
         ...globals.jest,
       },
     },
-    ignores: ["infra/migrations/*.js"],
+    ignores: ["infra/migrations/*"],
   },
   globalIgnores([".next/*", "node_modules/*"]),
 ]);
