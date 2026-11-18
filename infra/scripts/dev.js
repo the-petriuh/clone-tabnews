@@ -1,5 +1,5 @@
-const { spawn } = require("child_process");
-const { execSync } = require("child_process");
+import { spawn } from "child_process";
+import { execSync } from "child_process";
 
 function cleanup() {
   console.log("\nParando serviços...");

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Study reposity for curso.dev course",
   "main": "main.js",
+  "type": "module",
   "scripts": {
     "dev": "node infra/scripts/dev.js",
     "test": "npm run services:up && concurrently -n next,jest --hide next -k -s command-jest \"next dev\" \"jest --runInBand --verbose\"",
