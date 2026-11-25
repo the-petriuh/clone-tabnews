@@ -3,6 +3,8 @@ import database from "infra/database.js";
 import { text } from "node:stream/consumers";
 import { version as uuidVersion } from "uuid";
 import { exportPages } from "next/dist/export/worker";
+import users from 'models/user';
+import password from "models/password";
 
 beforeAll(async () => {
   await orchestrator.waitForAllServices();
@@ -37,7 +39,7 @@ describe("POST api/v1/users", () => {
         id: responseBody.id,
         username: "daniel.petriu",
         email: "daniel.petriu@gmail.com",
-        password: "senha123",
+        password: responseBody.password,
         created_at: responseBody.created_at,
         updated_at: responseBody.updated_at,
       });
@@ -45,6 +47,14 @@ describe("POST api/v1/users", () => {
       expect(uuidVersion(responseBody.id)).toBe(4);
       expect(Date.parse(responseBody.created_at)).not.toBeNaN();
       expect(Date.parse(responseBody.updated_at)).not.toBeNaN();
+
+      const userInDatabase = await users.findOneByUsername("daniel.petriu");
+
+      const correctPasswordMatch = await password.compare("senha123", responseBody.password);
+      const incorrectPasswordMatch = await password.compare("senhaErrada", responseBody.password);
+
+      expect(correctPasswordMatch).toBe(true);
+      expect(incorrectPasswordMatch).toBe(false);
     });
 
     test("With duplicated email", async () => {
